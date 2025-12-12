@@ -1,0 +1,116 @@
+###############################
+# GLOBAL
+###############################
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+*.swp
+*.swo
+*.iml
+.idea/
+.vscode/
+*.log
+
+# Environment variables
+.env
+.env.*
+*.env.local
+*.env.development.local
+*.env.production.local
+*.env.test.local
+
+# Build outputs
+dist/
+build/
+out/
+
+###############################
+# FRONTEND (React + Vite)
+###############################
+
+# Node modules
+node_modules/
+
+# Vite cache
+.vite/
+
+# Local dev server cache
+*.tsbuildinfo
+
+# Optional debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+###############################
+# BACKEND (Spring Boot)
+###############################
+
+# Maven build
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Maven wrapper logs
+.mvn/timing.properties
+
+# Logs
+*.log
+*.out
+
+# Spring Boot specific
+spring.log
+*.pid
+*.zip
+
+# IntelliJ output
+out/
+
+# Credentials
+application.properties
+application.yml
+application-dev.yml
+application-prod.yml
+application-test.yml
+
+###############################
+# DATABASE / POSTGRESQL
+###############################
+
+# Local DB dumps
+*.sql
+*.dump
+*.backup
+
+###############################
+# CI/CD / DEPLOYMENT
+###############################
+
+# Vercel output
+.vercel/
+
+# Render build artifacts
+.render-build/
+
+# Docker (if used later)
+docker-compose.override.yml
+*.dockerfile.local
+
+###############################
+# OTHER
+###############################
+
+# Coverage
+coverage/
+*.lcov
+
+# Temporary files
+tmp/
+temp/
+.cache/
+
+# Generated CSV exports
+exports/
+*.csv
