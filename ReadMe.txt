@@ -1,8 +1,8 @@
-#Resident Management System
+# Resident Management System
 ---
 
 
-🚀 Project Overview
+🚀## Project Overview
 
 The Resident Management System (RMS) centralises all resident-related information, care interactions, and documentation into one unified platform.
 It reduces paperwork, increases accuracy, provides accountability through audit logs, and enhances day-to-day workflow for care staff and administrators.
