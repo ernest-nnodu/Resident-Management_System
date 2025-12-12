@@ -1,0 +1,37 @@
+# Resident Management System
+
+## 🚀 Project Overview
+
+The **Resident Management System (RMS)** centralises all resident-related information, care interactions, and documentation into one unified platform.
+It reduces paperwork, increases accuracy, provides accountability through audit logs, and enhances day-to-day workflow for care staff and administrators.
+
+## 🎯 Project Goals
+
+- Create a secure and scalable system for managing residents in a care home.
+
+- Digitise support plans, interactions, and emergency contacts.
+
+- Provide staff with an intuitive interface to record and retrieve resident information.
+
+- Deploy a professionally structured full-stack application accessible online.
+
+## 🧩 Core Features (MVP)
+
+- Residents Management
+
+- Create, update, view, and delete resident profiles
+
+- Emergency contact management
+
+- Support plan creation and editing
+
+- Daily care interaction logging
+
+- Search and filter resident records
+
+- Authentication
+
+- Admin + Staff roles
+
+- Stores user, timestamp, and action type
+
