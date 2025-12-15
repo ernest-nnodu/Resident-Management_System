@@ -69,7 +69,7 @@ spring.log
 out/
 
 # Credentials
-application.properties
+#application.properties
 application.yml
 application-dev.yml
 application-prod.yml
