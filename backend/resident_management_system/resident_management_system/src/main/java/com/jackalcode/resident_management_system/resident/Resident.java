@@ -1,5 +1,5 @@
 
-package com.jackalcode.resident_management_system.entity;
+package com.jackalcode.resident_management_system.resident;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,7 +33,8 @@ public class Resident {
     private LocalDate dateOfBirth;
 
     @Column(nullable = false)
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Column(nullable = false)
     private String address;
