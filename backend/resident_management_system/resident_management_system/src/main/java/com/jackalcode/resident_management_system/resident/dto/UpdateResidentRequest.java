@@ -12,7 +12,6 @@ public record UpdateResidentRequest(
         @NotNull LocalDate dateOfBirth,
         @NotNull Gender gender,
         @NotBlank String address,
-        @NotNull LocalDate admissionDate,
         String primaryPhoneNumber,
         String nhsNumber,
         @NotBlank String allergies
