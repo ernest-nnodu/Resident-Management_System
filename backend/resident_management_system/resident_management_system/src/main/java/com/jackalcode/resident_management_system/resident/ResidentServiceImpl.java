@@ -22,7 +22,22 @@ public class ResidentServiceImpl implements ResidentService {
         List<Resident> residents = residentRepository.findAll();
 
         return residents.stream()
-                .map(resident -> mapper.map(resident, ResidentResponse.class))
+                .map(this::mapToResponse)
                 .toList();
+    }
+
+    private ResidentResponse mapToResponse(Resident resident) {
+        return new ResidentResponse(
+                resident.getId(),
+                resident.getFirstName(),
+                resident.getLastName(),
+                resident.getDateOfBirth(),
+                resident.getGender(),
+                resident.getAddress(),
+                resident.getAdmissionDate(),
+                resident.getPrimaryPhoneNumber(),
+                resident.getNhsNumber(),
+                resident.getAllergies()
+        );
     }
 }
