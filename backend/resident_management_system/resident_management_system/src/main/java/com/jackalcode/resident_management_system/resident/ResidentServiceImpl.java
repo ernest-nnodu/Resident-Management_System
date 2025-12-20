@@ -6,6 +6,7 @@ import com.jackalcode.resident_management_system.resident.dto.ResidentResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -42,6 +43,8 @@ public class ResidentServiceImpl implements ResidentService {
         }*/
 
         Resident residentToSave = mapper.map(createResidentRequest, Resident.class);
+        residentToSave.setAdmissionDate(LocalDate.now());
+        System.out.println(residentToSave.getAdmissionDate());
         Resident savedResident = residentRepository.save(residentToSave);
 
         return mapToResponse(savedResident);
