@@ -30,19 +30,20 @@ public class ResidentServiceImpl implements ResidentService {
     }
 
     @Override
-    public ResidentResponse createResident(CreateResidentRequest createResidentRequest) {
+    public ResidentResponse createResident(CreateResidentRequest request) {
 
-        /*if (residentRepository.existsByNhsNumber(createResidentRequest.nhsNumber())) {
+        if ( request.nhsNumber() != null && residentRepository.existsByNhsNumber(request.nhsNumber())) {
             throw new ResidentAlreadyExistsException("Resident already exists with nhs number: "
-                    + createResidentRequest.nhsNumber());
+                    + request.nhsNumber());
         }
 
-        if (residentRepository.existsByFirstNameAndLastNameAndDateOfBirth(createResidentRequest.firstName(),
-                createResidentRequest.lastName(), createResidentRequest.dateOfBirth())) {
-            throw new ResidentAlreadyExistsException("Resident already exists with first name: " )
-        }*/
+        if (residentRepository.existsByFirstNameAndLastNameAndDateOfBirth(request.firstName(),
+                request.lastName(), request.dateOfBirth())) {
+            throw new ResidentAlreadyExistsException("Resident already exists with fullname: " + request.firstName() + " "
+            + request.lastName() + ", date of birth: " + request.dateOfBirth());
+        }
 
-        Resident residentToSave = mapper.map(createResidentRequest, Resident.class);
+        Resident residentToSave = mapper.map(request, Resident.class);
         residentToSave.setAdmissionDate(LocalDate.now());
         System.out.println(residentToSave.getAdmissionDate());
         Resident savedResident = residentRepository.save(residentToSave);

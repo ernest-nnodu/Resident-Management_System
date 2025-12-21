@@ -8,5 +8,5 @@ import java.util.List;
 public interface ResidentService {
 
     List<ResidentResponse> getResidents();
-    ResidentResponse createResident(CreateResidentRequest createResidentRequest);
+    ResidentResponse createResident(CreateResidentRequest request);
 }

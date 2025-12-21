@@ -30,6 +30,6 @@ public class ResidentController {
 
         ResidentResponse residentResponse = residentService.createResident(residentRequest);
 
-        return new ResponseEntity<>(residentResponse, HttpStatus.OK);
+        return new ResponseEntity<>(residentResponse, HttpStatus.CREATED);
     }
 }
