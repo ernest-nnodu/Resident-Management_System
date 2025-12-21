@@ -45,7 +45,7 @@ public class Resident {
     @Column(name = "primary_phone_number")
     private String primaryPhoneNumber;
 
-    @Column(name = "nhs_number")
+    @Column(name = "nhs_number", unique = true)
     private String nhsNumber;
 
     @Lob

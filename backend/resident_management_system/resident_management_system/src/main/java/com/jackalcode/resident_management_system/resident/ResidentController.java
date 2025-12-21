@@ -1,11 +1,10 @@
 package com.jackalcode.resident_management_system.resident;
 
+import com.jackalcode.resident_management_system.resident.dto.CreateResidentRequest;
 import com.jackalcode.resident_management_system.resident.dto.ResidentResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +23,13 @@ public class ResidentController {
         List<ResidentResponse> residentResponses = residentService.getResidents();
 
         return new ResponseEntity<>(residentResponses, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<ResidentResponse> createResident(@RequestBody CreateResidentRequest residentRequest) {
+
+        ResidentResponse residentResponse = residentService.createResident(residentRequest);
+
+        return new ResponseEntity<>(residentResponse, HttpStatus.CREATED);
     }
 }
