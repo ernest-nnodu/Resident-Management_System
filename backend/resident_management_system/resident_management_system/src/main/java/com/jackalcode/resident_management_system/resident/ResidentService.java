@@ -4,9 +4,11 @@ import com.jackalcode.resident_management_system.resident.dto.CreateResidentRequ
 import com.jackalcode.resident_management_system.resident.dto.ResidentResponse;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ResidentService {
 
     List<ResidentResponse> getResidents();
     ResidentResponse createResident(CreateResidentRequest request);
+    ResidentResponse getResidentById(UUID residentId);
 }
