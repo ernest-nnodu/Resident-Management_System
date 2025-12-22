@@ -1,6 +1,7 @@
 package com.jackalcode.resident_management_system.resident;
 
 import com.jackalcode.resident_management_system.exception.ResidentAlreadyExistsException;
+import com.jackalcode.resident_management_system.exception.ResidentNotFoundException;
 import com.jackalcode.resident_management_system.resident.dto.CreateResidentRequest;
 import com.jackalcode.resident_management_system.resident.dto.ResidentResponse;
 import org.modelmapper.ModelMapper;
@@ -55,7 +56,9 @@ public class ResidentServiceImpl implements ResidentService {
     @Override
     public ResidentResponse getResidentById(UUID residentId) {
 
-        Resident resident = residentRepository.findById(residentId).get();
+        Resident resident = residentRepository.findById(residentId).orElseThrow(
+                () -> new ResidentNotFoundException("Resident not found with id: " + residentId)
+        );
 
         return mapToResponse(resident);
     }

@@ -16,4 +16,11 @@ public class GlobalExceptionHandler {
 
         return new ApiError("RESIDENT_ALREADY_EXIST", ex.getMessage(), request.getRequestURI());
     }
+
+    @ExceptionHandler(ResidentNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiError handleResidentNotFoundException(ResidentNotFoundException ex, HttpServletRequest request) {
+
+        return new ApiError("RESIDENT_NOT_FOUND", ex.getMessage(), request.getRequestURI());
+    }
 }
