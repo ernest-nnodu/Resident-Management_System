@@ -73,6 +73,11 @@ public class ResidentServiceImpl implements ResidentService {
                 () -> new ResidentNotFoundException("Resident not found with id: " + residentId)
         );
 
+        if (request.nhsNumber() != null && !(request.nhsNumber().equals(existingResident.getNhsNumber()))
+                && residentRepository.existsByNhsNumber(request.nhsNumber())) {
+            throw new ResidentAlreadyExistsException("Resident already exists with nhs number: " + request.nhsNumber());
+        }
+
         mapper.map(request, existingResident);
         Resident updatedResident = residentRepository.save(existingResident);
 
