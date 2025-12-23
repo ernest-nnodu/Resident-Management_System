@@ -2,6 +2,7 @@ package com.jackalcode.resident_management_system.resident;
 
 import com.jackalcode.resident_management_system.resident.dto.CreateResidentRequest;
 import com.jackalcode.resident_management_system.resident.dto.ResidentResponse;
+import com.jackalcode.resident_management_system.resident.dto.UpdateResidentRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,15 @@ public class ResidentController {
     public ResponseEntity<ResidentResponse> getResident(@PathVariable UUID residentId) {
 
         ResidentResponse residentResponse = residentService.getResidentById(residentId);
+
+        return new ResponseEntity<>(residentResponse, HttpStatus.OK);
+    }
+
+    @PutMapping("/{residentId}")
+    public ResponseEntity<ResidentResponse> updateResident(@PathVariable UUID residentId,
+                                                           @RequestBody UpdateResidentRequest request) {
+
+        ResidentResponse residentResponse = residentService.updateResident(residentId, request);
 
         return new ResponseEntity<>(residentResponse, HttpStatus.OK);
     }
