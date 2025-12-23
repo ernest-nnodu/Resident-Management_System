@@ -4,6 +4,8 @@ import com.jackalcode.resident_management_system.exception.ResidentAlreadyExists
 import com.jackalcode.resident_management_system.exception.ResidentNotFoundException;
 import com.jackalcode.resident_management_system.resident.dto.CreateResidentRequest;
 import com.jackalcode.resident_management_system.resident.dto.ResidentResponse;
+import com.jackalcode.resident_management_system.resident.dto.UpdateResidentRequest;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +63,20 @@ public class ResidentServiceImpl implements ResidentService {
         );
 
         return mapToResponse(resident);
+    }
+
+    @Override
+    @Transactional
+    public ResidentResponse updateResident(UUID residentId, UpdateResidentRequest request) {
+
+        Resident existingResident = residentRepository.findById(residentId).orElseThrow(
+                () -> new ResidentNotFoundException("Resident not found with id: " + residentId)
+        );
+
+        mapper.map(request, existingResident);
+        Resident updatedResident = residentRepository.save(existingResident);
+
+        return mapToResponse(updatedResident);
     }
 
     private ResidentResponse mapToResponse(Resident resident) {
