@@ -38,7 +38,7 @@ public class ResidentController {
     @GetMapping("/{residentId}")
     public ResponseEntity<ResidentResponse> getResident(@PathVariable UUID residentId) {
 
-        ResidentResponse residentResponse = residentService.getResidentById(residentId);
+        ResidentResponse residentResponse = residentService.getResident(residentId);
 
         return new ResponseEntity<>(residentResponse, HttpStatus.OK);
     }
