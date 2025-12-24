@@ -56,11 +56,9 @@ public class ResidentServiceImpl implements ResidentService {
     }
 
     @Override
-    public ResidentResponse getResidentById(UUID residentId) {
+    public ResidentResponse getResident(UUID residentId) {
 
-        Resident resident = residentRepository.findById(residentId).orElseThrow(
-                () -> new ResidentNotFoundException("Resident not found with id: " + residentId)
-        );
+        Resident resident = getResidentById(residentId);
 
         return mapToResponse(resident);
     }
@@ -69,9 +67,7 @@ public class ResidentServiceImpl implements ResidentService {
     @Transactional
     public ResidentResponse updateResident(UUID residentId, UpdateResidentRequest request) {
 
-        Resident existingResident = residentRepository.findById(residentId).orElseThrow(
-                () -> new ResidentNotFoundException("Resident not found with id: " + residentId)
-        );
+        Resident existingResident = getResidentById(residentId);
 
         if (request.nhsNumber() != null && !(request.nhsNumber().equals(existingResident.getNhsNumber()))
                 && residentRepository.existsByNhsNumber(request.nhsNumber())) {
@@ -82,6 +78,20 @@ public class ResidentServiceImpl implements ResidentService {
         Resident updatedResident = residentRepository.save(existingResident);
 
         return mapToResponse(updatedResident);
+    }
+
+    @Override
+    public void deleteResident(UUID residentId) {
+
+        Resident existingResident = getResidentById(residentId);
+
+        residentRepository.delete(existingResident);
+    }
+
+    private Resident getResidentById(UUID residentId) {
+        return residentRepository.findById(residentId).orElseThrow(
+                () -> new ResidentNotFoundException("Resident not found with id: " + residentId)
+        );
     }
 
     private ResidentResponse mapToResponse(Resident resident) {

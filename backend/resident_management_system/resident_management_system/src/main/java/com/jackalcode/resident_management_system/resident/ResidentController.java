@@ -38,7 +38,7 @@ public class ResidentController {
     @GetMapping("/{residentId}")
     public ResponseEntity<ResidentResponse> getResident(@PathVariable UUID residentId) {
 
-        ResidentResponse residentResponse = residentService.getResidentById(residentId);
+        ResidentResponse residentResponse = residentService.getResident(residentId);
 
         return new ResponseEntity<>(residentResponse, HttpStatus.OK);
     }
@@ -50,5 +50,13 @@ public class ResidentController {
         ResidentResponse residentResponse = residentService.updateResident(residentId, request);
 
         return new ResponseEntity<>(residentResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{residentId}")
+    public ResponseEntity<HttpStatus> deleteResident(@PathVariable UUID residentId) {
+
+        residentService.deleteResident(residentId);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

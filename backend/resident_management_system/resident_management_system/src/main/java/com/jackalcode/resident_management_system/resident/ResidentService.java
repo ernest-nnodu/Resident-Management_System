@@ -11,6 +11,7 @@ public interface ResidentService {
 
     List<ResidentResponse> getResidents();
     ResidentResponse createResident(CreateResidentRequest request);
-    ResidentResponse getResidentById(UUID residentId);
+    ResidentResponse getResident(UUID residentId);
     ResidentResponse updateResident(UUID residentId, UpdateResidentRequest request);
+    void deleteResident(UUID residentId);
 }
