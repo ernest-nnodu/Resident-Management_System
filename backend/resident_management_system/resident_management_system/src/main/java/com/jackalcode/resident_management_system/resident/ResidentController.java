@@ -51,4 +51,12 @@ public class ResidentController {
 
         return new ResponseEntity<>(residentResponse, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{residentId}")
+    public ResponseEntity<HttpStatus> deleteResident(@PathVariable UUID residentId) {
+
+        residentService.deleteResident(residentId);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
