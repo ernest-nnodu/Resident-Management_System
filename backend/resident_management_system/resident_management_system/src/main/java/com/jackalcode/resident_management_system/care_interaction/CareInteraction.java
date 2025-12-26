@@ -27,10 +27,10 @@ public class CareInteraction {
     @JoinColumn(name = "resident_id", nullable = false)
     private Resident resident;
 
-    @Column(name = "recorded_on")
+    @Column(name = "recorded_on", nullable = false)
     private LocalDate recordedOn;
 
-    @Column(name = "recorded_at")
+    @Column(name = "recorded_at", nullable = false)
     private Instant recordedAt;
 
     @Enumerated(EnumType.STRING)
