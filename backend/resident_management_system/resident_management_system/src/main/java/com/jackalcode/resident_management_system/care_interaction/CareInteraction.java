@@ -23,7 +23,9 @@ public class CareInteraction {
     @EqualsAndHashCode.Include
     private UUID id;
 
-    //private Resident resident;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resident_id", nullable = false)
+    private Resident resident;
 
     @Column(name = "recorded_on")
     private LocalDate recordedOn;
@@ -32,8 +34,16 @@ public class CareInteraction {
     private Instant recordedAt;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private CareInteractionType type;
 
     @Lob
+    @Column(nullable = false)
     private String description;
+
+    @PrePersist
+    protected void onCreate() {
+        recordedOn = LocalDate.now();
+        recordedAt = Instant.now();
+    }
 }

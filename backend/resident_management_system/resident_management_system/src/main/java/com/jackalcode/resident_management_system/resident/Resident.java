@@ -1,11 +1,14 @@
 
 package com.jackalcode.resident_management_system.resident;
 
+import com.jackalcode.resident_management_system.care_interaction.CareInteraction;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -54,6 +57,9 @@ public class Resident {
 
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean archived = false;
+
+    @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CareInteraction> careInteractions = new ArrayList<>();
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
