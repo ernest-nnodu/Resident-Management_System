@@ -52,6 +52,9 @@ public class Resident {
     @Column(nullable = false)
     private String allergies;
 
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean archived = false;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
