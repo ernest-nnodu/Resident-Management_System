@@ -85,7 +85,7 @@ public class ResidentServiceImpl implements ResidentService {
 
         Resident existingResident = getResidentById(residentId);
 
-        residentRepository.delete(existingResident);
+        existingResident.setArchived(true);
     }
 
     private Resident getResidentById(UUID residentId) {
