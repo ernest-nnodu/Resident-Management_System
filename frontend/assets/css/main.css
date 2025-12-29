@@ -1,7 +1,13 @@
 
 .sidebar {
-    width: 300px;
+    width: 240px;
     height: 100vh;
     background-color: white;
     border-right: 1px solid #ddd;
+}
+
+.resident-count {
+    width: 300px;
+    background-color: lightsteelblue;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
