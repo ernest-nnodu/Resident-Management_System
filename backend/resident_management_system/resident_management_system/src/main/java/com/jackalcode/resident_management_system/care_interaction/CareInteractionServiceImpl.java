@@ -4,10 +4,12 @@ import com.jackalcode.resident_management_system.care_interaction.dto.CareIntera
 import com.jackalcode.resident_management_system.exception.ResidentNotFoundException;
 import com.jackalcode.resident_management_system.resident.ResidentRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class CareInteractionServiceImpl implements CareInteractionService {
 
     private final CareInteractionRepository careInteractionRepository;
