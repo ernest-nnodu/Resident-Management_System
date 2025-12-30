@@ -6,8 +6,20 @@
     border-right: 1px solid #ddd;
 }
 
+.main-content {
+    width: 100%;
+}
+
+.flex-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
+}
+
 .resident-count {
-    width: 300px;
-    background-color: lightsteelblue;
+    width: 100%;
+    color: darkblue;
+    background-color: lavender;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
