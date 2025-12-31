@@ -1,25 +1,28 @@
 
 .sidebar {
-    width: 240px;
     height: 100vh;
+    position: fixed;
+    z-index: 100;
+    opacity: 90%;
     background-color: white;
-    border-right: 1px solid #ddd;
+    border-right: 1px solid white;
 }
 
-.main-content {
-    width: 100%;
+@media (min-width: 768px) {
+    .sidebar {
+        position: static;
+        z-index: 0;
+        opacity: 100%;
+    }
 }
 
-.flex-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    border: 2px solid black;
-}
 
 .resident-count {
     width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     color: darkblue;
-    background-color: lavender;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

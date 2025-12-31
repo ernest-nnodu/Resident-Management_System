@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>RMS | Dashboard</title>
 
     <!-- Bootstrap -->
@@ -10,7 +10,7 @@
           crossorigin="anonymous">
 
     <!-- App styles -->
-    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/main.css"/>
 </head>
 
 <body>
@@ -40,59 +40,59 @@
     </nav>
 </div>
 
-<div class="d-flex">
-    <!-- Sidebar -->
-    <div id="sidebar">
-        <div id="sidebarMenu" class="collapse d-md-block bg-white sidebar p-3">
-            <ul class="nav nav-pills flex-column">
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <aside id="sidebarMenu" class="col-md-3 col-lg-2 collapse d-md-block bg-dark sidebar p-3">
+            <ul class="nav nav-pills flex-column align-items-center p-2">
                 <li class="nav-item">
-                    <a href="../dashboard/dashboard.html" class="nav-link">
+                    <a href="../dashboard/dashboard.html" class="nav-link text-light">
                         Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../residents/residents-list.html" class="nav-link">
+                    <a href="../residents/residents-list.html" class="nav-link text-light">
                         Residents
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../exports/export.html" class="nav-link">
+                    <a href="../exports/export.html" class="nav-link text-light">
                         Export
                     </a>
                 </li>
             </ul>
-        </div>
-    </div>
+        </aside>
 
-    <!-- Main Content -->
-    <main class="main-content p-3">
+        <!-- Main Content -->
+        <main class="main-content col-md-9 col-lg-10">
 
             <!-- PAGE CONTENT GOES HERE -->
 
             <!--Residents count in the system  -->
-          <div class="container">
-                <div class="row text-center p-3">
-                    <div class="col-sm-10 col-md-4 p-2">
+            <div class="container-fluid">
+                <div class="row text-center p-2">
+                    <div class="col p-2">
                         <div class="card resident-count">
                             <h2 class="fs-1">50</h2>
                             <p class="fs-6">Total Residents</p>
                         </div>
                     </div>
-                    <div class="col-sm-10 col-md-4 p-2">
+                    <div class="col p-2">
                         <div class="card resident-count">
                             <h2 class="fs-1">48</h2>
                             <p class="fs-6">Active Residents</p>
                         </div>
                     </div>
-                    <div class="col-sm-10 col-md-4 p-2">
+                    <div class="col p-2">
                         <div class="card resident-count">
                             <h2 class="fs-1">36</h2>
                             <p class="fs-6">Interactions</p>
                         </div>
                     </div>
                 </div>
-           </div>
-    </main>
+            </div>
+        </main>
+    </div>
 </div>
 
 <!-- Bootstrap JS -->
