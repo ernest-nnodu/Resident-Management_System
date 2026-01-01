@@ -16,55 +16,55 @@
 <body>
 
 <!-- Navbar -->
-<div id="navbar">
-    <nav class="navbar navbar-dark bg-dark px-3">
-        <div class="d-flex align-items-center">
-            <!-- Toggle button (mobile only) -->
-            <button
-                    class="btn btn-outline-light me-2 d-md-none"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#sidebarMenu">
-                ☰
-            </button>
-
-            <span class="navbar-brand mb-0">
-      <span class="text-primary fs-3 fw-bold fst-italic">C</span>are
-                <span class="text-success fs-3 fw-bold fst-italic">N</span>est
-    </span>
-        </div>
-
-        <button class="btn btn-outline-light btn-md">
-            Logout
+<nav id="navbar" class="navbar navbar-dark bg-dark px-2">
+    <div class="d-flex align-items-center">
+        <!-- Toggle button (mobile only) -->
+        <button class="btn btn-outline-light me-2 d-md-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#sidebarMenu">
+            ☰
         </button>
-    </nav>
-</div>
+
+        <span class="navbar-brand mb-0 fs-4 text-center">
+                <span class="fs-3 fw-bold fst-italic">C</span>are
+                <span class="fs-3 fw-bold fst-italic">N</span>est
+            </span>
+        <hr>
+    </div>
+
+    <button class="btn btn-outline-light btn-md">
+        Logout
+    </button>
+</nav>
 
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
-        <aside id="sidebarMenu" class="col-md-3 col-lg-2 collapse d-md-block bg-dark sidebar p-3">
-            <ul class="nav nav-pills flex-column align-items-center p-2">
+        <aside id="sidebarMenu"
+               class="col-md-3 col-lg-2 collapse d-md-flex flex-column align-items-center mb-3 mb-md-2 me-md-auto bg-dark text-white text-decoration-none sidebar">
+            <ul class="nav nav-pills flex-column mb-auto p-2">
                 <li class="nav-item">
                     <a href="../dashboard/dashboard.html" class="nav-link text-light">
                         Dashboard
                     </a>
+                    <hr>
                 </li>
                 <li class="nav-item">
                     <a href="../residents/residents-list.html" class="nav-link text-light">
                         Residents
                     </a>
+                    <hr>
                 </li>
                 <li class="nav-item">
                     <a href="../exports/export.html" class="nav-link text-light">
                         Export
                     </a>
+                    <hr>
                 </li>
             </ul>
         </aside>
 
         <!-- Main Content -->
-        <main class="main-content col-md-9 col-lg-10">
+        <main id="main" class="main-content col-md-9 col-lg-10">
 
             <!-- PAGE CONTENT GOES HERE -->
 
@@ -102,6 +102,5 @@
 
 <!-- Shared JS -->
 <script src="../../assets/js/utils.js"></script>
-
 </body>
 </html>
