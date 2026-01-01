@@ -2,12 +2,14 @@ package com.jackalcode.resident_management_system.care_interaction;
 
 import com.jackalcode.resident_management_system.care_interaction.dto.CareInteractionResponse;
 import com.jackalcode.resident_management_system.care_interaction.dto.CreateCareInteractionRequest;
+import com.jackalcode.resident_management_system.care_interaction.dto.UpdateCareInteractionRequest;
+import com.jackalcode.resident_management_system.exception.CareInteractionNotFoundException;
 import com.jackalcode.resident_management_system.exception.ResidentNotFoundException;
 import com.jackalcode.resident_management_system.resident.Resident;
 import com.jackalcode.resident_management_system.resident.ResidentRepository;
-import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -62,6 +64,25 @@ public class CareInteractionServiceImpl implements CareInteractionService {
 
         //Map saved care interaction entity to care interaction response and return
         return mapToResponse(savedCareInteraction);
+    }
+
+    @Override
+    @Transactional
+    public CareInteractionResponse updateCareInteraction(UUID careInteractionId, UpdateCareInteractionRequest request) {
+
+        //Obtain care interaction entity with the given id
+        CareInteraction existingInteraction = careInteractionRepository.findById(careInteractionId).orElseThrow(
+                () -> new CareInteractionNotFoundException("Care interaction not found with id: " + careInteractionId)
+        );
+
+        //Update the obtained care interaction entity with request data which are not null
+        modelMapper.map(request, existingInteraction);
+
+        //Save updated care interaction entity to database
+        CareInteraction updatedInteraction = careInteractionRepository.save(existingInteraction);
+
+        //return updated care interaction entity
+        return mapToResponse(updatedInteraction);
     }
 
     private CareInteractionResponse mapToResponse(CareInteraction careInteraction) {
