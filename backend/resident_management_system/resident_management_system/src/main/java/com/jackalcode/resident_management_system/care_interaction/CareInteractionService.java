@@ -11,5 +11,6 @@ public interface CareInteractionService {
 
     List<CareInteractionResponse> getCareInteractions(UUID residentId);
     CareInteractionResponse createCareInteraction(UUID residentId, CreateCareInteractionRequest request);
+    CareInteractionResponse getCareInteraction(UUID careInteractionId);
     CareInteractionResponse updateCareInteraction(UUID careInteractionId, UpdateCareInteractionRequest request);
 }

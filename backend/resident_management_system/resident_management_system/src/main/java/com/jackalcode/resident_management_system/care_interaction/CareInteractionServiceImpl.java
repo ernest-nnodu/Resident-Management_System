@@ -67,13 +67,21 @@ public class CareInteractionServiceImpl implements CareInteractionService {
     }
 
     @Override
+    public CareInteractionResponse getCareInteraction(UUID careInteractionId) {
+
+        //Obtain care interaction entity with the given id
+        CareInteraction interaction = getInteraction(careInteractionId);
+
+        //map interaction entity to response and return
+        return mapToResponse(interaction);
+    }
+
+    @Override
     @Transactional
     public CareInteractionResponse updateCareInteraction(UUID careInteractionId, UpdateCareInteractionRequest request) {
 
         //Obtain care interaction entity with the given id
-        CareInteraction existingInteraction = careInteractionRepository.findById(careInteractionId).orElseThrow(
-                () -> new CareInteractionNotFoundException("Care interaction not found with id: " + careInteractionId)
-        );
+        CareInteraction existingInteraction = getInteraction(careInteractionId);
 
         //Update the obtained care interaction entity with request data which are not null
         modelMapper.map(request, existingInteraction);
@@ -81,8 +89,14 @@ public class CareInteractionServiceImpl implements CareInteractionService {
         //Save updated care interaction entity to database
         CareInteraction updatedInteraction = careInteractionRepository.save(existingInteraction);
 
-        //return updated care interaction entity
+        //map care interaction entity to response and return
         return mapToResponse(updatedInteraction);
+    }
+
+    private CareInteraction getInteraction(UUID careInteractionId) {
+        return careInteractionRepository.findById(careInteractionId).orElseThrow(
+                () -> new CareInteractionNotFoundException("Care interaction not found with id: " + careInteractionId)
+        );
     }
 
     private CareInteractionResponse mapToResponse(CareInteraction careInteraction) {
