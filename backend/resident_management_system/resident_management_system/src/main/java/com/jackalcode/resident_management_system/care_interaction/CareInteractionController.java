@@ -34,4 +34,12 @@ public class CareInteractionController {
 
         return new ResponseEntity<>(careInteractionResponse, HttpStatus.CREATED);
     }
+
+    @GetMapping(path = "/api/v1/care-interactions/{interactionId}")
+    public ResponseEntity<CareInteractionResponse> getCareInteraction(@PathVariable UUID interactionId) {
+
+        CareInteractionResponse interactionResponse = careInteractionService.getCareInteraction(interactionId);
+
+        return new ResponseEntity<>(interactionResponse, HttpStatus.OK);
+    }
 }
