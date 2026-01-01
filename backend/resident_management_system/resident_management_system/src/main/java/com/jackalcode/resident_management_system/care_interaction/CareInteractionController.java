@@ -2,6 +2,7 @@ package com.jackalcode.resident_management_system.care_interaction;
 
 import com.jackalcode.resident_management_system.care_interaction.dto.CareInteractionResponse;
 import com.jackalcode.resident_management_system.care_interaction.dto.CreateCareInteractionRequest;
+import com.jackalcode.resident_management_system.care_interaction.dto.UpdateCareInteractionRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,22 @@ public class CareInteractionController {
         CareInteractionResponse careInteractionResponse = careInteractionService.createCareInteraction(residentId, request);
 
         return new ResponseEntity<>(careInteractionResponse, HttpStatus.CREATED);
+    }
+
+    @GetMapping(path = "/api/v1/care-interactions/{interactionId}")
+    public ResponseEntity<CareInteractionResponse> getCareInteraction(@PathVariable UUID interactionId) {
+
+        CareInteractionResponse interactionResponse = careInteractionService.getCareInteraction(interactionId);
+
+        return new ResponseEntity<>(interactionResponse, HttpStatus.OK);
+    }
+
+    @PatchMapping(path = "/api/v1/care-interactions/{interactionId}")
+    public ResponseEntity<CareInteractionResponse> updateCareInteraction(@PathVariable UUID interactionId,
+                                                                         @RequestBody UpdateCareInteractionRequest request) {
+
+        CareInteractionResponse interactionResponse = careInteractionService.updateCareInteraction(interactionId, request);
+
+        return new ResponseEntity<>(interactionResponse, HttpStatus.OK);
     }
 }

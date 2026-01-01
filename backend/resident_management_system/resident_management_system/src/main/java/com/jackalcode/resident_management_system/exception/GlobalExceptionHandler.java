@@ -23,4 +23,11 @@ public class GlobalExceptionHandler {
 
         return new ApiError("RESIDENT_NOT_FOUND", ex.getMessage(), request.getRequestURI());
     }
+
+    @ExceptionHandler(CareInteractionNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiError handleCareInteractionNotFoundException(CareInteractionNotFoundException ex, HttpServletRequest request) {
+
+        return new ApiError("CARE_INTERACTION_NOT_FOUND", ex.getMessage(), request.getRequestURI());
+    }
 }
