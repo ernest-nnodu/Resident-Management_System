@@ -52,4 +52,11 @@ public class CareInteractionController {
 
         return new ResponseEntity<>(interactionResponse, HttpStatus.OK);
     }
+
+    @DeleteMapping(path = "/api/v1/care-interactions/{interactionId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCareInteraction(@PathVariable UUID interactionId) {
+
+        careInteractionService.deleteCareInteraction(interactionId);
+    }
 }

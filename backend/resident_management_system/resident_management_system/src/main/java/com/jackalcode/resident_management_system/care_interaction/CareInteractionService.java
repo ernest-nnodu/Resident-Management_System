@@ -13,4 +13,5 @@ public interface CareInteractionService {
     CareInteractionResponse createCareInteraction(UUID residentId, CreateCareInteractionRequest request);
     CareInteractionResponse getCareInteraction(UUID careInteractionId);
     CareInteractionResponse updateCareInteraction(UUID careInteractionId, UpdateCareInteractionRequest request);
+    void deleteCareInteraction(UUID careInteractionId);
 }

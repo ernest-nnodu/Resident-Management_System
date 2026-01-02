@@ -93,6 +93,17 @@ public class CareInteractionServiceImpl implements CareInteractionService {
         return mapToResponse(updatedInteraction);
     }
 
+    @Override
+    @Transactional
+    public void deleteCareInteraction(UUID careInteractionId) {
+
+        //Obtain care interaction to be deleted with the given interaction id
+        CareInteraction existingInteraction = getInteraction(careInteractionId);
+
+        //Delete interaction from the database
+        careInteractionRepository.delete(existingInteraction);
+    }
+
     private CareInteraction getInteraction(UUID careInteractionId) {
         return careInteractionRepository.findById(careInteractionId).orElseThrow(
                 () -> new CareInteractionNotFoundException("Care interaction not found with id: " + careInteractionId)
