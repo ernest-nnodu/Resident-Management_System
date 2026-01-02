@@ -94,6 +94,7 @@ public class CareInteractionServiceImpl implements CareInteractionService {
     }
 
     @Override
+    @Transactional
     public void deleteCareInteraction(UUID careInteractionId) {
 
         //Obtain care interaction to be deleted with the given interaction id
