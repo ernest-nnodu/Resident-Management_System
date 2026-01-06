@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>RMS | Dashboard</title>
 
     <!-- Bootstrap -->
@@ -10,24 +10,171 @@
           crossorigin="anonymous">
 
     <!-- App styles -->
-    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/main.css"/>
 </head>
 
 <body>
 
 <!-- Navbar -->
-<div id="navbar"></div>
+<nav id="navbar" class="navbar navbar-dark bg-dark px-2">
+    <div class="d-flex align-items-center">
+        <!-- Toggle button (mobile only) -->
+        <button class="btn btn-outline-light me-2 d-md-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#sidebarMenu">
+            ☰
+        </button>
 
-<div class="d-flex">
-    <!-- Sidebar -->
-    <div id="sidebar"></div>
+        <span class="navbar-brand mb-0 fs-4 text-center">
+                <span class="fs-3 fw-bold fst-italic">C</span>are
+                <span class="fs-3 fw-bold fst-italic">N</span>est
+            </span>
+        <hr>
+    </div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <h1 class="page-title">Dashboard</h1>
+    <button class="btn btn-outline-light btn-md">
+        Logout
+    </button>
+</nav>
 
-        <!-- PAGE CONTENT GOES HERE -->
-    </main>
+<div class="page container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <aside id="sidebarMenu"
+               class="col-md-3 col-lg-2 collapse d-md-flex flex-column align-items-center bg-dark text-white text-decoration-none sidebar">
+            <ul class="nav nav-pills flex-column mb-auto p-2">
+                <li class="nav-item">
+                    <a href="../dashboard/dashboard.html" class="nav-link text-light">
+                        Dashboard
+                    </a>
+                    <hr>
+                </li>
+                <li class="nav-item">
+                    <a href="../residents/residents-list.html" class="nav-link text-light">
+                        Residents
+                    </a>
+                    <hr>
+                </li>
+                <li class="nav-item">
+                    <a href="../exports/export.html" class="nav-link text-light">
+                        Export
+                    </a>
+                    <hr>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main" class="main-content col-md-9 col-lg-10">
+
+            <!-- PAGE CONTENT GOES HERE -->
+
+            <!--Residents count in the system  -->
+            <div class="container-fluid">
+                <div class="row text-center p-2">
+                    <div class="col p-2">
+                        <div class="card resident-count">
+                            <h2 class="fs-1">50</h2>
+                            <p class="fs-6">Total Residents</p>
+                        </div>
+                    </div>
+                    <div class="col p-2">
+                        <div class="card resident-count">
+                            <h2 class="fs-1">48</h2>
+                            <p class="fs-6">Active Residents</p>
+                        </div>
+                    </div>
+                    <div class="col p-2">
+                        <div class="card resident-count">
+                            <h2 class="fs-1">36</h2>
+                            <p class="fs-6">Interactions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Activity Table  section-->
+            <div class="container-fluid">
+                <div class="row p-2">
+                    <div class="col p-2">
+                        <div class="table-title mt-4 p-2">
+                            <h2 class="fs-3 text-center">Recent Activities</h2>
+                        </div>
+
+                        <div id="activity-table" class="border-top">
+                            <table class="table text-center">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Resident</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Staff</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">08:30</th>
+                                    <td>John D</td>
+                                    <td>Breakfast</td>
+                                    <td>Mary Poppins</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">09:00</th>
+                                    <td>John D</td>
+                                    <td>Medication</td>
+                                    <td>Mary Poppins</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">09:30</th>
+                                    <td>John D</td>
+                                    <td>Personal Care</td>
+                                    <td>David Cameron</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--End of Activity section -->
+
+            <!-- Alert section -->
+            <div class="container-fluid">
+                <div class="row p-2">
+                    <div class="col p-2">
+                        <div id="alerts">
+                            <h2 class="fs-3 text-center">Alerts / Action needed</h2>
+                            <hr>
+                            <p class="fs-6 text-justify border-bottom"><span class="fs-4 text-danger">! </span>Louise. G medication overdue</p>
+                            <p class="fs-6 text-justify border-bottom"><span class="fs-4 text-danger">! </span>Joseph. S had a fall incident</p>
+                            <p class="fs-6 text-justify border-bottom"><span class="fs-4 text-danger">! </span>John. D balance is low</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Alert section -->
+
+            <!-- Quick Actions section -->
+            <div class="container-fluid mt-0">
+                <div class="row p-2">
+                    <div class="col p-2">
+                        <div id="quick-actions">
+                            <h2 class="fs-3 text-center">Quick Actions</h2>
+                            <hr>
+                            <div class="button-container text-center">
+                                <button type="button" class="btn btn-outline-dark m-2">Add Interaction</button>
+                                <button type="button" class="btn btn-outline-dark m-2">Add Resident</button>
+                                <button type="button" class="btn btn-outline-dark m-2">View Resident</button>
+                                <button type="button" class="btn btn-outline-dark m-2">Add Support Plan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of quick actions section -->
+
+        </main>
+    </div>
 </div>
 
 <!-- Bootstrap JS -->
@@ -37,6 +184,5 @@
 
 <!-- Shared JS -->
 <script src="../../assets/js/utils.js"></script>
-
 </body>
 </html>
