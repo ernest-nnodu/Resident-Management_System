@@ -52,7 +52,7 @@ public class SupportPlan {
     private Instant updatedAt;
 
     @Column(nullable = false)
-    private boolean archive = false;
+    private boolean archived = false;
 
     @PrePersist
     protected void onCreate() {
