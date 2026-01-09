@@ -7,4 +7,5 @@ import java.util.UUID;
 
 public interface SupportPlanService {
 
+    List<SupportPlanSummaryResponse> getActiveSupportPlans(UUID residentId);
 }
