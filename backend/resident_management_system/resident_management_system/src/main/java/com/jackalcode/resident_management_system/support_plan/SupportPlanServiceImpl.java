@@ -5,10 +5,12 @@ import com.jackalcode.resident_management_system.resident.Resident;
 import com.jackalcode.resident_management_system.resident.ResidentRepository;
 import com.jackalcode.resident_management_system.support_plan.dto.SupportPlanSummaryResponse;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class SupportPlanServiceImpl implements SupportPlanService {
 
     private final SupportPlanRepository supportPlanRepository;
