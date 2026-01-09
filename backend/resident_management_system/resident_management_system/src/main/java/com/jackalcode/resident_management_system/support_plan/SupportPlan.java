@@ -31,6 +31,9 @@ public class SupportPlan {
     @Column(nullable = false)
     private SupportPlanDomain domain;
 
+    @Column(nullable = false)
+    private String title;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SupportPlanStatus status;
