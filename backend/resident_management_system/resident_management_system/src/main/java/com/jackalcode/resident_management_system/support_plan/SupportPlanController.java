@@ -1,11 +1,11 @@
 package com.jackalcode.resident_management_system.support_plan;
 
+import com.jackalcode.resident_management_system.support_plan.dto.CreateSupportPlanRequest;
+import com.jackalcode.resident_management_system.support_plan.dto.SupportPlanResponse;
 import com.jackalcode.resident_management_system.support_plan.dto.SupportPlanSummaryResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,5 +25,14 @@ public class SupportPlanController {
         List<SupportPlanSummaryResponse> supportPlanSummaries = supportPlanService.getActiveSupportPlans(residentId);
 
         return new ResponseEntity<>(supportPlanSummaries, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/api/v1/residents/{residentId}/support-plans")
+    public ResponseEntity<SupportPlanResponse> createSupportPlan(@PathVariable UUID residentId,
+                                                                 @RequestBody CreateSupportPlanRequest request) {
+
+        SupportPlanResponse response = supportPlanService.createSupportPlan(residentId, request);
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }
