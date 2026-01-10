@@ -38,4 +38,11 @@ public class GlobalExceptionHandler {
         return new ApiError("SUPPORT_PLAN_ALREADY_EXISTS", ex.getMessage(), request.getRequestURI());
     }
 
+    @ExceptionHandler(SupportPlanNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiError handleSupportPlanNotFoundException(SupportPlanNotFoundException ex, HttpServletRequest request) {
+
+        return new ApiError("SUPPORT_PLAN_NOT_FOUND", ex.getMessage(), request.getRequestURI());
+    }
+
 }

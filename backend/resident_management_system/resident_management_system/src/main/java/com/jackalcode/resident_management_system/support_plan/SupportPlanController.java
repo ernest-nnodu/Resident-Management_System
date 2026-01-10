@@ -35,4 +35,12 @@ public class SupportPlanController {
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+    @GetMapping(path = "/api/v1/support-plans/{planId}")
+    public ResponseEntity<SupportPlanResponse> getSupportPlan(@PathVariable UUID planId) {
+
+        SupportPlanResponse response = supportPlanService.getSupportPlan(planId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
