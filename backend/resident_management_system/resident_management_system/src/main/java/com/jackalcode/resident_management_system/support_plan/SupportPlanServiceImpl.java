@@ -1,8 +1,11 @@
 package com.jackalcode.resident_management_system.support_plan;
 
 import com.jackalcode.resident_management_system.exception.ResidentNotFoundException;
+import com.jackalcode.resident_management_system.exception.SupportPlanAlreadyExistsException;
 import com.jackalcode.resident_management_system.resident.Resident;
 import com.jackalcode.resident_management_system.resident.ResidentRepository;
+import com.jackalcode.resident_management_system.support_plan.dto.CreateSupportPlanRequest;
+import com.jackalcode.resident_management_system.support_plan.dto.SupportPlanResponse;
 import com.jackalcode.resident_management_system.support_plan.dto.SupportPlanSummaryResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -42,6 +45,32 @@ public class SupportPlanServiceImpl implements SupportPlanService {
                 .toList();
     }
 
+    @Override
+    public SupportPlanResponse createSupportPlan(UUID residentId, CreateSupportPlanRequest request) {
+
+        //Retrieve resident with the resident ID
+        Resident resident = getResidentById(residentId);
+
+        //Check if an active support plan already exists for the support plan domain in the request
+        if (request.status() == SupportPlanStatus.ACTIVE && supportPlanRepository.existsByResidentIdAndDomainAndStatusAndArchivedFalse(
+                residentId, request.domain(), request.status())) {
+            throw new SupportPlanAlreadyExistsException("Active support plan in the " + request.domain() +
+                    " already exist for resident with resident id: " + residentId);
+        }
+
+        //Convert support plan request to support plan entity
+        SupportPlan supportPlan = modelMapper.map(request, SupportPlan.class);
+
+        //Assign support plan to resident
+        supportPlan.setResident(resident);
+
+        //Persist support plan to database
+        SupportPlan savedPlan = supportPlanRepository.save(supportPlan);
+
+        //Return saved support plan
+        return mapToResponse(savedPlan);
+    }
+
     private Resident getResidentById(UUID residentId) {
         return residentRepository.findById(residentId).orElseThrow(
                 () -> new ResidentNotFoundException("Resident not found with id: " + residentId)
@@ -56,6 +85,22 @@ public class SupportPlanServiceImpl implements SupportPlanService {
                 supportPlan.getTitle(),
                 supportPlan.getStatus(),
                 supportPlan.getReviewDate()
+        );
+    }
+
+    private SupportPlanResponse mapToResponse(SupportPlan supportPlan) {
+
+        return new SupportPlanResponse(
+                supportPlan.getId(),
+                supportPlan.getResident().getId(),
+                supportPlan.getDomain(),
+                supportPlan.getTitle(),
+                supportPlan.getContent(),
+                supportPlan.getStatus(),
+                supportPlan.getStartDate(),
+                supportPlan.getReviewDate(),
+                supportPlan.getCreateAt(),
+                supportPlan.getUpdatedAt()
         );
     }
 }

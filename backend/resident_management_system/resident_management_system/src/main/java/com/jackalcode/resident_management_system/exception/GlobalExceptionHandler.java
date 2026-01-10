@@ -30,4 +30,12 @@ public class GlobalExceptionHandler {
 
         return new ApiError("CARE_INTERACTION_NOT_FOUND", ex.getMessage(), request.getRequestURI());
     }
+
+    @ExceptionHandler(SupportPlanAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiError handleSupportPlanAlreadyExistsException(SupportPlanAlreadyExistsException ex, HttpServletRequest request) {
+
+        return new ApiError("SUPPORT_PLAN_ALREADY_EXISTS", ex.getMessage(), request.getRequestURI());
+    }
+
 }
