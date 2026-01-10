@@ -12,4 +12,6 @@ public interface SupportPlanService {
     List<SupportPlanSummaryResponse> getActiveSupportPlans(UUID residentId);
 
     SupportPlanResponse createSupportPlan(UUID residentId, CreateSupportPlanRequest request);
+
+    SupportPlanResponse getSupportPlan(UUID planId);
 }

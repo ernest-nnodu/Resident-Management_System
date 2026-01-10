@@ -2,6 +2,7 @@ package com.jackalcode.resident_management_system.support_plan;
 
 import com.jackalcode.resident_management_system.exception.ResidentNotFoundException;
 import com.jackalcode.resident_management_system.exception.SupportPlanAlreadyExistsException;
+import com.jackalcode.resident_management_system.exception.SupportPlanNotFoundException;
 import com.jackalcode.resident_management_system.resident.Resident;
 import com.jackalcode.resident_management_system.resident.ResidentRepository;
 import com.jackalcode.resident_management_system.support_plan.dto.CreateSupportPlanRequest;
@@ -69,6 +70,22 @@ public class SupportPlanServiceImpl implements SupportPlanService {
 
         //Return saved support plan
         return mapToResponse(savedPlan);
+    }
+
+    @Override
+    public SupportPlanResponse getSupportPlan(UUID planId) {
+
+        //Get support plan entity with id or throw exception if id invalid
+        SupportPlan plan = getPlanById(planId);
+
+        //Convert support plan entity to response and return
+        return mapToResponse(plan);
+    }
+
+    private SupportPlan getPlanById(UUID planId) {
+        return supportPlanRepository.findById(planId).orElseThrow(
+                () -> new SupportPlanNotFoundException("Support plan not found with id: " + planId)
+        );
     }
 
     private Resident getResidentById(UUID residentId) {
