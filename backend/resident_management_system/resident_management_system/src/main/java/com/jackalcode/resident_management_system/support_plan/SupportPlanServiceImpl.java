@@ -8,8 +8,10 @@ import com.jackalcode.resident_management_system.resident.ResidentRepository;
 import com.jackalcode.resident_management_system.support_plan.dto.CreateSupportPlanRequest;
 import com.jackalcode.resident_management_system.support_plan.dto.SupportPlanResponse;
 import com.jackalcode.resident_management_system.support_plan.dto.SupportPlanSummaryResponse;
+import com.jackalcode.resident_management_system.support_plan.dto.UpdateSupportPlanRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -52,7 +54,7 @@ public class SupportPlanServiceImpl implements SupportPlanService {
         //Retrieve resident with the resident ID
         Resident resident = getResidentById(residentId);
 
-        //Check if an active support plan already exists for the support plan domain in the request
+        //Check if an active support plan already exists for the support plan domain if request plan status is active
         if (request.status() == SupportPlanStatus.ACTIVE && supportPlanRepository.existsByResidentIdAndDomainAndStatusAndArchivedFalse(
                 residentId, request.domain(), request.status())) {
             throw new SupportPlanAlreadyExistsException("Active support plan in the " + request.domain() +
@@ -80,6 +82,34 @@ public class SupportPlanServiceImpl implements SupportPlanService {
 
         //Convert support plan entity to response and return
         return mapToResponse(plan);
+    }
+
+    @Override
+    @Transactional
+    public SupportPlanResponse updateSupportPlan(UUID planId, UpdateSupportPlanRequest request) {
+
+        //Get support plan entity with id or throw an exception if id is invalid
+        SupportPlan existingPlan = getPlanById(planId);
+
+        //Check if an active support plan already exists for the support plan domain if request plan status is active
+        //(Enforce ONE active support plan per domain)
+        if (request.status() != null && request.status() == SupportPlanStatus.ACTIVE) {
+            if (existingPlan.getStatus() != SupportPlanStatus.ACTIVE &&
+                    supportPlanRepository.existsByResidentIdAndDomainAndStatusAndArchivedFalse(existingPlan.getResident().getId(),
+                            existingPlan.getDomain(), SupportPlanStatus.ACTIVE)) {
+                throw new SupportPlanAlreadyExistsException("Active support plan in the " + existingPlan.getDomain() +
+                        " already exist for resident with resident id: " + existingPlan.getResident().getId());
+            }
+        }
+
+        //Update existing support plan with request plan
+        modelMapper.map(request, existingPlan);
+
+        //Save update plan to database
+        SupportPlan savedPlan = supportPlanRepository.save(existingPlan);
+
+        //return updated support plan
+        return mapToResponse(savedPlan);
     }
 
     private SupportPlan getPlanById(UUID planId) {
