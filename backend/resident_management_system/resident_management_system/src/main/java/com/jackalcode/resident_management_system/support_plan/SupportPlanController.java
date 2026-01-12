@@ -3,6 +3,7 @@ package com.jackalcode.resident_management_system.support_plan;
 import com.jackalcode.resident_management_system.support_plan.dto.CreateSupportPlanRequest;
 import com.jackalcode.resident_management_system.support_plan.dto.SupportPlanResponse;
 import com.jackalcode.resident_management_system.support_plan.dto.SupportPlanSummaryResponse;
+import com.jackalcode.resident_management_system.support_plan.dto.UpdateSupportPlanRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,15 @@ public class SupportPlanController {
     public ResponseEntity<SupportPlanResponse> getSupportPlan(@PathVariable UUID planId) {
 
         SupportPlanResponse response = supportPlanService.getSupportPlan(planId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PatchMapping(path = "api/v1/support-plans/{planId}")
+    public ResponseEntity<SupportPlanResponse> updateSupportPlan(@PathVariable UUID planId,
+                                                                 @RequestBody UpdateSupportPlanRequest request) {
+
+        SupportPlanResponse response = supportPlanService.updateSupportPlan(planId, request);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

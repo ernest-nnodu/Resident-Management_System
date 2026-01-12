@@ -57,7 +57,7 @@ public class SupportPlanServiceImpl implements SupportPlanService {
         //Check if an active support plan already exists for the support plan domain if request plan status is active
         if (request.status() == SupportPlanStatus.ACTIVE && supportPlanRepository.existsByResidentIdAndDomainAndStatusAndArchivedFalse(
                 residentId, request.domain(), request.status())) {
-            throw new SupportPlanAlreadyExistsException("Active support plan in the " + request.domain() +
+            throw new SupportPlanAlreadyExistsException("Active support plan for " + request.domain() +
                     " already exist for resident with resident id: " + residentId);
         }
 
@@ -97,7 +97,7 @@ public class SupportPlanServiceImpl implements SupportPlanService {
             if (existingPlan.getStatus() != SupportPlanStatus.ACTIVE &&
                     supportPlanRepository.existsByResidentIdAndDomainAndStatusAndArchivedFalse(existingPlan.getResident().getId(),
                             existingPlan.getDomain(), SupportPlanStatus.ACTIVE)) {
-                throw new SupportPlanAlreadyExistsException("Active support plan in the " + existingPlan.getDomain() +
+                throw new SupportPlanAlreadyExistsException("Active support plan for " + existingPlan.getDomain() +
                         " already exist for resident with resident id: " + existingPlan.getResident().getId());
             }
         }
