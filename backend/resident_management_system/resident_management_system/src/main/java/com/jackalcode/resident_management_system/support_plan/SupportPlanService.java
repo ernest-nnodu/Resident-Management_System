@@ -17,4 +17,6 @@ public interface SupportPlanService {
     SupportPlanResponse getSupportPlan(UUID planId);
 
     SupportPlanResponse updateSupportPlan(UUID planId, UpdateSupportPlanRequest request);
+
+    void deleteSupportPlan(UUID planId);
 }

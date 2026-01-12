@@ -45,12 +45,19 @@ public class SupportPlanController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PatchMapping(path = "api/v1/support-plans/{planId}")
+    @PatchMapping(path = "/api/v1/support-plans/{planId}")
     public ResponseEntity<SupportPlanResponse> updateSupportPlan(@PathVariable UUID planId,
                                                                  @RequestBody UpdateSupportPlanRequest request) {
 
         SupportPlanResponse response = supportPlanService.updateSupportPlan(planId, request);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/api/v1/support-plans/{planId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteSupportPlan(@PathVariable UUID planId) {
+
+        supportPlanService.deleteSupportPlan(planId);
     }
 }
