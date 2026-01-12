@@ -112,6 +112,26 @@ public class SupportPlanServiceImpl implements SupportPlanService {
         return mapToResponse(savedPlan);
     }
 
+    @Override
+    @Transactional
+    public void deleteSupportPlan(UUID planId) {
+
+        //Get support plan entity with id or throw an exception if id is invalid
+        SupportPlan existingPlan = getPlanById(planId);
+
+        //Exit if existing plan is archived
+        if (existingPlan.isArchived()) {
+            return;
+        }
+
+        //Perform soft delete on existing support plan
+        existingPlan.setStatus(SupportPlanStatus.ARCHIVED);
+        existingPlan.setArchived(true);
+
+        //Persist changes to database
+        supportPlanRepository.save(existingPlan);
+    }
+
     private SupportPlan getPlanById(UUID planId) {
         return supportPlanRepository.findById(planId).orElseThrow(
                 () -> new SupportPlanNotFoundException("Support plan not found with id: " + planId)
