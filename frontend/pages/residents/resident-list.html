@@ -67,17 +67,34 @@
         <!-- End of sidebar -->
 
         <main id="main" class="col-md-9 ms-sm-auto col-lg-10 px-4">
+
             <!-- Heading -->
             <div id="heading" class="container">
                 <h1 class="text-center p-3">Residents</h1>
             </div>
 
-            <!-- Controls
-            <div id="controls">
-                <input class="form-control me-2" type="search" placeholder="Search by name" aria-label="Search">
-                <input class="form-control me-2" type="search" placeholder="Search by address" aria-label="Search">
-                <a class="btn btn-outline-dark" href="../residents/add-resident.html">Add Resident</a>
-            </div> -->
+            <!-- Controls -->
+            <div class="d-flex justify-content-center">
+                    <div class="col-md-8">
+
+                        <!-- Add New Resident -->
+                        <div class="d-flex justify-content-end mb-2 p-2">
+                            <a class="btn btn-outline-dark" href="../residents/add-resident.html">Add Resident</a>
+                        </div>
+
+                        <!-- Filter Controls -->
+                        <div id="controls" class="d-flex justify-content-center">
+                            <input class="form-control me-2" type="search" placeholder="Search by name" aria-label="Search">
+                            <select class="form-select">
+                                <option selected>Status</option>
+                                <option value="ACTIVE">Active</option>
+                                <option value="ARCHIVED">Archived</option>
+                                <option value="ALL">All</option>
+                            </select>
+                        </div>
+
+                    </div>
+            </div>
         </main>
     </div>
 </div>
