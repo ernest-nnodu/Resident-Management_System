@@ -2,13 +2,27 @@ package com.jackalcode.resident_management_system.exception;
 
 import com.jackalcode.resident_management_system.resident.Resident;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.w3c.dom.stylesheets.LinkStyle;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ResidentAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
@@ -45,4 +59,22 @@ public class GlobalExceptionHandler {
         return new ApiError("SUPPORT_PLAN_NOT_FOUND", ex.getMessage(), request.getRequestURI());
     }
 
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                  HttpHeaders headers,
+                                                                  HttpStatusCode status,
+                                                                  WebRequest request) {
+        List<ObjectError> errorList = ex.getBindingResult().getAllErrors();
+        List<ApiError> errors = new ArrayList<>();
+
+        errorList.forEach(
+                (error) -> {
+                    String fieldName = ((FieldError) error).getField();
+                    String message = error.getDefaultMessage();
+                    String code = fieldName.toUpperCase() + "_INVALID";
+                    errors.add(new ApiError(code, message, request.getDescription(false)));
+                }
+        );
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
 }
