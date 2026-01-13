@@ -46,7 +46,7 @@ public class ResidentController {
 
     @PutMapping("/{residentId}")
     public ResponseEntity<ResidentResponse> updateResident(@PathVariable UUID residentId,
-                                                           @RequestBody UpdateResidentRequest request) {
+                                                           @Valid @RequestBody UpdateResidentRequest request) {
 
         ResidentResponse residentResponse = residentService.updateResident(residentId, request);
 
