@@ -7,13 +7,13 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public record UpdateResidentRequest(
-        @NotBlank String firstName,
-        @NotBlank String lastName,
-        @NotNull LocalDate dateOfBirth,
-        @NotNull Gender gender,
-        @NotBlank String address,
+        @NotBlank(message = "First name is required") String firstName,
+        @NotBlank(message = "Last name is required") String lastName,
+        @NotNull(message = "Date of Birth is required") LocalDate dateOfBirth,
+        @NotNull(message = "Gender is required") Gender gender,
+        @NotBlank(message = "Address is required") String address,
         String primaryPhoneNumber,
         String nhsNumber,
-        @NotBlank String allergies
+        @NotBlank(message = "Allergies are required") String allergies
 ) {
 }

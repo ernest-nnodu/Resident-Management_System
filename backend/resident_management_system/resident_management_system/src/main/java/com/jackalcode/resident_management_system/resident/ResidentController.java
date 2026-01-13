@@ -3,6 +3,7 @@ package com.jackalcode.resident_management_system.resident;
 import com.jackalcode.resident_management_system.resident.dto.CreateResidentRequest;
 import com.jackalcode.resident_management_system.resident.dto.ResidentResponse;
 import com.jackalcode.resident_management_system.resident.dto.UpdateResidentRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class ResidentController {
     }
 
     @PostMapping
-    public ResponseEntity<ResidentResponse> createResident(@RequestBody CreateResidentRequest residentRequest) {
+    public ResponseEntity<ResidentResponse> createResident(@Valid @RequestBody CreateResidentRequest residentRequest) {
 
         ResidentResponse residentResponse = residentService.createResident(residentRequest);
 
@@ -45,7 +46,7 @@ public class ResidentController {
 
     @PutMapping("/{residentId}")
     public ResponseEntity<ResidentResponse> updateResident(@PathVariable UUID residentId,
-                                                           @RequestBody UpdateResidentRequest request) {
+                                                           @Valid @RequestBody UpdateResidentRequest request) {
 
         ResidentResponse residentResponse = residentService.updateResident(residentId, request);
 
