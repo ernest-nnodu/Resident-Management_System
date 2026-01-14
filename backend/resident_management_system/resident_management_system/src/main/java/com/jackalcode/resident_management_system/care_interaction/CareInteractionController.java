@@ -3,6 +3,7 @@ package com.jackalcode.resident_management_system.care_interaction;
 import com.jackalcode.resident_management_system.care_interaction.dto.CareInteractionResponse;
 import com.jackalcode.resident_management_system.care_interaction.dto.CreateCareInteractionRequest;
 import com.jackalcode.resident_management_system.care_interaction.dto.UpdateCareInteractionRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class CareInteractionController {
 
     @PostMapping(path = "/api/v1/residents/{residentId}/care-interactions")
     public ResponseEntity<CareInteractionResponse> createCareInteraction(@PathVariable UUID residentId,
-                                                                         @RequestBody CreateCareInteractionRequest request) {
+                                                                         @Valid @RequestBody CreateCareInteractionRequest request) {
 
         CareInteractionResponse careInteractionResponse = careInteractionService.createCareInteraction(residentId, request);
 

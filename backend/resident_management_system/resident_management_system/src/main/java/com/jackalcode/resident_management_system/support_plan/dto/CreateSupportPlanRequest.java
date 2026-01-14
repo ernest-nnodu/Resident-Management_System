@@ -9,22 +9,22 @@ import java.time.LocalDate;
 
 public record CreateSupportPlanRequest(
 
-        @NotNull
+        @NotNull(message = "Support plan domain is required")
         SupportPlanDomain domain,
 
-        @NotBlank
+        @NotBlank(message = "Support plan title is required")
         String title,
 
-        @NotBlank
+        @NotBlank(message = "Support plan content is required")
         String content,
 
-        @NotNull
+        @NotNull(message = "Support plan status is required")
         SupportPlanStatus status,
 
-        @NotNull
+        @NotNull(message = "Support plan start date is required")
         LocalDate startDate,
 
-        @NotNull
+        @NotNull(message = "Support plan review date is required")
         LocalDate reviewDate
 ) {
 }

@@ -4,6 +4,7 @@ import com.jackalcode.resident_management_system.support_plan.dto.CreateSupportP
 import com.jackalcode.resident_management_system.support_plan.dto.SupportPlanResponse;
 import com.jackalcode.resident_management_system.support_plan.dto.SupportPlanSummaryResponse;
 import com.jackalcode.resident_management_system.support_plan.dto.UpdateSupportPlanRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class SupportPlanController {
 
     @PostMapping(path = "/api/v1/residents/{residentId}/support-plans")
     public ResponseEntity<SupportPlanResponse> createSupportPlan(@PathVariable UUID residentId,
-                                                                 @RequestBody CreateSupportPlanRequest request) {
+                                                                 @Valid @RequestBody CreateSupportPlanRequest request) {
 
         SupportPlanResponse response = supportPlanService.createSupportPlan(residentId, request);
 
