@@ -6,10 +6,10 @@ import jakarta.validation.constraints.NotNull;
 
 public record CreateCareInteractionRequest(
 
-        @NotNull
+        @NotNull(message = "Care interation type is required")
         CareInteractionType type,
 
-        @NotBlank
+        @NotBlank(message = "Description should not be empty or blank")
         String description
 ) {
 }

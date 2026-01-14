@@ -1,5 +1,6 @@
 package com.jackalcode.resident_management_system.exception;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.jackalcode.resident_management_system.resident.Resident;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
@@ -78,6 +79,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 }
         );
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(
+            HttpMessageNotReadableException ex,
+            HttpHeaders headers,
+            HttpStatusCode status,
+            WebRequest request) {
+
+        ApiError error = new ApiError("INVALID_VALUE", ex.getMessage(), request.getContextPath());
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
 
