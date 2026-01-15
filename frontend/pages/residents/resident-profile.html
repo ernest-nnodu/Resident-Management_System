@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RMS | Resident-list</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="../../assets/css/main.css"/>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav id="navbar" class="navbar navbar-dark bg-dark px-2">
+    <div class="d-flex align-items-center">
+        <!-- Toggle button (mobile only) -->
+        <button class="btn btn-outline-light me-2 d-md-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#sidebarMenu">
+            ☰
+        </button>
+
+        <span class="navbar-brand mb-0 fs-4 text-center">
+                <span class="fs-3 fw-bold fst-italic">C</span>are
+                <span class="fs-3 fw-bold fst-italic">N</span>est
+            </span>
+        <hr>
+    </div>
+
+    <button class="btn btn-outline-light btn-md">
+        Logout
+    </button>
+</nav>
+<!-- End of Navbar-->
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Sidebar -->
+        <aside id="sidebarMenu"
+               class="col-md-3 col-lg-2 collapse d-md-flex flex-column align-items-center bg-dark text-white text-decoration-none sidebar">
+            <ul class="nav nav-pills flex-column mb-auto p-2">
+                <li class="nav-item">
+                    <a href="../dashboard/dashboard.html" class="nav-link text-light">
+                        Dashboard
+                    </a>
+                    <hr>
+                </li>
+                <li class="nav-item">
+                    <a href="../residents/resident-list.html" class="nav-link text-light">
+                        Residents
+                    </a>
+                    <hr>
+                </li>
+                <li class="nav-item">
+                    <a href="../exports/export.html" class="nav-link text-light">
+                        Export
+                    </a>
+                    <hr>
+                </li>
+            </ul>
+        </aside>
+        <!-- End of sidebar -->
+
+        <main id="main" class="col-md-9 ms-sm-auto col-lg-10 px-4">
+
+            <!-- Heading -->
+            <div class="container justify-content-between mb-3">
+                <h1 class="border-bottom text-center p-3">Resident Profile</h1>
+            </div>
+            <!-- End of Heading -->
+
+            <!-- Profile Image -->
+            <div class="d-flex flex-column align-items-center justify-content-center shadow mb-3">
+                <img src="../../assets/images/person-fill.svg" alt="profile image" width="100"/>
+                <h3>John Doe</h3>
+                <p class="border rounded-pill bg-success text-light p-2">Active</p>
+            </div>
+            <!-- End of Profile Image -->
+
+            <!-- Personal Details -->
+            <section class="shadow">
+                <h2 class="text-center p-2">Personal Details</h2>
+                <p class="mx-3 p-2 fs-5">First Name: John</p>
+                <p class="mx-3 p-2 fs-5">Last Name: Doe</p>
+                <p class="mx-3 p-2 fs-5">Date of Birth: 6th June 1965</p>
+                <p class="mx-3 p-2 fs-5">Gender: Male</p>
+                <p class="mx-3 p-2 fs-5">Address: 20th Inverness Road, Tonto</p>
+                <p class="mx-3 p-2 fs-5">NHS Number: 346 538 790</p>
+                <p class="mx-3 p-2 fs-5">Admission Date: 12th February 1997</p>
+            </section>
+            <!--End of Personal Details -->
+
+            <!-- Emergency Contact -->
+            <section class="shadow p-2">
+                <h2 class="text-center p-2">Emergency Contacts</h2>
+
+                <div class="border border-rounded m-2">
+                    <p class="mx-3 p-2 fs-5">Jane Doe (Daughter)</p>
+                    <p class="mx-3 p-2 fs-5">123 Main Street, Tonto</p>
+                    <p class="mx-3 p-2 fs-5">076789034</p>
+                </div>
+
+                <div class="border border-rounded m-2">
+                    <p class="mx-3 p-2 fs-5">Mark Doe (Son)</p>
+                    <p class="mx-3 p-2 fs-5">123 Main Street, Tonto</p>
+                    <p class="mx-3 p-2 fs-5">076789034</p>
+                </div>
+
+            </section>
+            <!-- End of Emergency Contact -->
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+<!-- Shared JS -->
+<script src="../../assets/js/utils.js"></script>
+
+</body>
+</html>
