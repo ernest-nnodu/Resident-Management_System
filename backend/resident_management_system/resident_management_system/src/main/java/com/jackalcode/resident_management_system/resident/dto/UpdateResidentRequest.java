@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
+@Schema(description = "Update resident DTO")
 public record UpdateResidentRequest(
         @Schema(description = "Resident first name") @NotBlank(message = "First name is required") String firstName,
         @Schema(description = "Resident last name") @NotBlank(message = "Last name is required") String lastName,
