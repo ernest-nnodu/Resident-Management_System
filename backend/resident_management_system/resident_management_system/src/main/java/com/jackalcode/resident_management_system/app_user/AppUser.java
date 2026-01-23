@@ -38,10 +38,10 @@ public class AppUser {
     private UserRole role;
 
     @Column(nullable = false)
-    private boolean enabled = true;
+    private boolean enabled;
 
     @Column(name = "account_non_locked", nullable = false)
-    private boolean accountNonLocked = true;
+    private boolean accountNonLocked;
 
     @Column(name = "failed_login_attempts")
     private int failedLoginAttempts;
@@ -58,7 +58,6 @@ public class AppUser {
 
     @PrePersist
     protected void onCreate() {
-        this.email = email.toLowerCase();
         this.createdAt = Instant.now();
         this.updatedAt = Instant.now();
     }
