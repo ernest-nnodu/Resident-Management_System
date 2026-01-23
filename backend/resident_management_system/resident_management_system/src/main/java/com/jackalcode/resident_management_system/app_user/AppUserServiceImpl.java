@@ -3,6 +3,7 @@ package com.jackalcode.resident_management_system.app_user;
 import com.jackalcode.resident_management_system.app_user.dto.AppUserResponse;
 import com.jackalcode.resident_management_system.app_user.dto.AppUserSummaryResponse;
 import com.jackalcode.resident_management_system.app_user.dto.CreateAppUserRequest;
+import com.jackalcode.resident_management_system.app_user.dto.UpdateAppUserRequest;
 import com.jackalcode.resident_management_system.exception.AppUserAlreadyExistsException;
 import com.jackalcode.resident_management_system.exception.AppUserNotFoundException;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,16 @@ public class AppUserServiceImpl implements AppUserService {
 
         AppUser user = getUserEntityById(userId);
         return mapToResponse(user);
+    }
+
+    @Override
+    public AppUserResponse updateUser(UUID userId, UpdateAppUserRequest request) {
+        return null;
+    }
+
+    @Override
+    public void disableUser(UUID userId) {
+
     }
 
     private AppUser getUserEntityById(UUID userId) {
