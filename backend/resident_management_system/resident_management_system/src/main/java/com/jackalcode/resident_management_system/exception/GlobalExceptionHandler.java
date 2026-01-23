@@ -62,6 +62,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ApiError("SUPPORT_PLAN_NOT_FOUND", ex.getMessage(), request.getRequestURI());
     }
 
+    @ExceptionHandler(AppUserAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiError handleAppUserAlreadyExistsException(AppUserAlreadyExistsException ex, HttpServletRequest request) {
+
+        return new ApiError("USER_ALREADY_EXIST", ex.getMessage(), request.getRequestURI());
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers,
