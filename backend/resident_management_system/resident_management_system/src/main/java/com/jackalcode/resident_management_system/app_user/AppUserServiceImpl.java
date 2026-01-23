@@ -77,6 +77,8 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public void disableUser(UUID userId) {
 
+        AppUser user = getUserEntityById(userId);
+        user.setEnabled(false);
     }
 
     private AppUser getUserEntityById(UUID userId) {
