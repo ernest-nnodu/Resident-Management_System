@@ -6,6 +6,7 @@ import com.jackalcode.resident_management_system.app_user.dto.CreateAppUserReque
 import com.jackalcode.resident_management_system.app_user.dto.UpdateAppUserRequest;
 import com.jackalcode.resident_management_system.exception.AppUserAlreadyExistsException;
 import com.jackalcode.resident_management_system.exception.AppUserNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +16,11 @@ import java.util.UUID;
 public class AppUserServiceImpl implements AppUserService {
 
     private final AppUserRepository userRepository;
+    private final ModelMapper mapper;
 
-    public AppUserServiceImpl(AppUserRepository userRepository) {
+    public AppUserServiceImpl(AppUserRepository userRepository, ModelMapper mapper) {
         this.userRepository = userRepository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -64,7 +67,11 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public AppUserResponse updateUser(UUID userId, UpdateAppUserRequest request) {
-        return null;
+
+        AppUser existingUser = getUserEntityById(userId);
+        mapper.map(request, existingUser);
+
+        return mapToResponse(existingUser);
     }
 
     @Override
