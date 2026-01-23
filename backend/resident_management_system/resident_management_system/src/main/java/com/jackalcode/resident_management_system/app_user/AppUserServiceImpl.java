@@ -4,9 +4,11 @@ import com.jackalcode.resident_management_system.app_user.dto.AppUserResponse;
 import com.jackalcode.resident_management_system.app_user.dto.AppUserSummaryResponse;
 import com.jackalcode.resident_management_system.app_user.dto.CreateAppUserRequest;
 import com.jackalcode.resident_management_system.exception.AppUserAlreadyExistsException;
+import com.jackalcode.resident_management_system.exception.AppUserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AppUserServiceImpl implements AppUserService {
@@ -50,6 +52,20 @@ public class AppUserServiceImpl implements AppUserService {
         AppUser savedUser = userRepository.save(user);
 
         return mapToResponse(savedUser);
+    }
+
+    @Override
+    public AppUserResponse getUserById(UUID userId) {
+
+        AppUser user = getUserEntityById(userId);
+        return mapToResponse(user);
+    }
+
+    private AppUser getUserEntityById(UUID userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new AppUserNotFoundException(
+                        "User not found with id: " + userId
+                ));
     }
 
     private AppUserResponse mapToResponse(AppUser user) {
