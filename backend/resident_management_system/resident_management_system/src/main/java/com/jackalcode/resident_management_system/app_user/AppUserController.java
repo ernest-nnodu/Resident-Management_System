@@ -19,4 +19,11 @@ public class AppUserController {
         this.appUserService = appUserService;
     }
 
+    @GetMapping
+    public ResponseEntity<List<AppUserSummaryResponse>> getUsers() {
+
+        List<AppUserSummaryResponse> userSummaryResponseList = appUserService.getUsers();
+
+        return new ResponseEntity<>(userSummaryResponseList, HttpStatus.OK);
+    }
 }
