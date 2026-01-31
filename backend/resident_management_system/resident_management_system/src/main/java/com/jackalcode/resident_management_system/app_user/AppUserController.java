@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Tag(name = "App User REST API", description = "Provides CRUD operations for managing app users")
 @RestController
@@ -42,5 +43,15 @@ public class AppUserController {
         AppUserResponse userResponse = appUserService.createUser(request);
 
         return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
+    }
+
+    @Operation(summary = "Retrieve a User", description = "Retrieve a User by ID")
+    @ApiResponse(responseCode = "200", description = "User retrieved successfully")
+    @GetMapping(path = "/{userId}")
+    public ResponseEntity<AppUserResponse> getUser(@PathVariable UUID userId) {
+
+        AppUserResponse userResponse = appUserService.getUserById(userId);
+
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
 }

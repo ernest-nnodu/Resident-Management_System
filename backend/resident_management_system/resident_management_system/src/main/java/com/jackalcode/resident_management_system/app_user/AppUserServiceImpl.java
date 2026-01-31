@@ -42,16 +42,7 @@ public class AppUserServiceImpl implements AppUserService {
             );
         }
 
-        AppUser user = AppUser.builder()
-                .email(request.email().toLowerCase())
-                .password(request.password())
-                .firstName(request.firstName())
-                .lastName(request.lastName())
-                .role(request.role())
-                .enabled(true)
-                .accountNonLocked(true)
-                .failedLoginAttempts(0)
-                .build();
+        AppUser user = mapToUserEntity(request);
 
         AppUser savedUser = userRepository.save(user);
 
@@ -61,14 +52,14 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public AppUserResponse getUserById(UUID userId) {
 
-        AppUser user = getUserEntityById(userId);
+        AppUser user = getUserEntity(userId);
         return mapToResponse(user);
     }
 
     @Override
     public AppUserResponse updateUser(UUID userId, UpdateAppUserRequest request) {
 
-        AppUser existingUser = getUserEntityById(userId);
+        AppUser existingUser = getUserEntity(userId);
         mapper.map(request, existingUser);
 
         return mapToResponse(existingUser);
@@ -77,15 +68,28 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public void disableUser(UUID userId) {
 
-        AppUser user = getUserEntityById(userId);
+        AppUser user = getUserEntity(userId);
         user.setEnabled(false);
     }
 
-    private AppUser getUserEntityById(UUID userId) {
+    private AppUser getUserEntity(UUID userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new AppUserNotFoundException(
                         "User not found with id: " + userId
                 ));
+    }
+
+    private AppUser mapToUserEntity(CreateAppUserRequest request) {
+        return AppUser.builder()
+                .email(request.email().toLowerCase())
+                .password(request.password())
+                .firstName(request.firstName())
+                .lastName(request.lastName())
+                .role(request.role())
+                .enabled(true)
+                .accountNonLocked(true)
+                .failedLoginAttempts(0)
+                .build();
     }
 
     private AppUserResponse mapToResponse(AppUser user) {
