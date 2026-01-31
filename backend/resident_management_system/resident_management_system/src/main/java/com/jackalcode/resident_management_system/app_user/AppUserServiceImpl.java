@@ -62,7 +62,7 @@ public class AppUserServiceImpl implements AppUserService {
         AppUser existingUser = getUserEntity(userId);
         mapper.map(request, existingUser);
 
-        return mapToResponse(existingUser);
+        return mapToResponse(userRepository.save(existingUser));
     }
 
     @Override

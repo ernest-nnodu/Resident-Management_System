@@ -3,6 +3,7 @@ package com.jackalcode.resident_management_system.app_user;
 import com.jackalcode.resident_management_system.app_user.dto.AppUserResponse;
 import com.jackalcode.resident_management_system.app_user.dto.AppUserSummaryResponse;
 import com.jackalcode.resident_management_system.app_user.dto.CreateAppUserRequest;
+import com.jackalcode.resident_management_system.app_user.dto.UpdateAppUserRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -51,6 +52,16 @@ public class AppUserController {
     public ResponseEntity<AppUserResponse> getUser(@PathVariable UUID userId) {
 
         AppUserResponse userResponse = appUserService.getUserById(userId);
+
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Modify a user", description = "Modify an existing user")
+    @ApiResponse(responseCode = "200", description = "User updated successfully")
+    @PatchMapping(path = "/{userId}")
+    public ResponseEntity<AppUserResponse> updateUser(@PathVariable UUID userId, @RequestBody UpdateAppUserRequest request) {
+
+        AppUserResponse userResponse = appUserService.updateUser(userId, request);
 
         return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
