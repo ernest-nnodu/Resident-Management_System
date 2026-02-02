@@ -65,4 +65,13 @@ public class AppUserController {
 
         return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
+
+    @Operation(summary = "Delete a user", description = "Soft delete an existing user")
+    @ApiResponse(responseCode = "204", description = "User deleted successfully")
+    @DeleteMapping(path = "/{userId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable UUID userId) {
+
+        appUserService.disableUser(userId);
+    }
 }
