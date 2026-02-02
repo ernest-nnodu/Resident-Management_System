@@ -1,0 +1,77 @@
+package com.jackalcode.resident_management_system.app_user;
+
+import com.jackalcode.resident_management_system.app_user.dto.AppUserResponse;
+import com.jackalcode.resident_management_system.app_user.dto.AppUserSummaryResponse;
+import com.jackalcode.resident_management_system.app_user.dto.CreateAppUserRequest;
+import com.jackalcode.resident_management_system.app_user.dto.UpdateAppUserRequest;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
+
+@Tag(name = "App User REST API", description = "Provides CRUD operations for managing app users")
+@RestController
+@RequestMapping("/api/v1/users")
+public class AppUserController {
+
+    private final AppUserService appUserService;
+
+    public AppUserController(AppUserService appUserService) {
+        this.appUserService = appUserService;
+    }
+
+    @Operation(summary = "Retrieve users", description = "Retrieves all users")
+    @ApiResponse(responseCode = "200", description = "Users retrieved successfully")
+    @GetMapping
+    public ResponseEntity<List<AppUserSummaryResponse>> getUsers() {
+
+        List<AppUserSummaryResponse> userSummaryResponseList = appUserService.getUsers();
+
+        return new ResponseEntity<>(userSummaryResponseList, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Create new user", description = "Creates and persist a new user ")
+    @ApiResponse(responseCode = "201", description = "User successfully created")
+    @PostMapping
+    public ResponseEntity<AppUserResponse> createUser(@Valid @RequestBody CreateAppUserRequest request) {
+
+        AppUserResponse userResponse = appUserService.createUser(request);
+
+        return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
+    }
+
+    @Operation(summary = "Retrieve a User", description = "Retrieve a User by ID")
+    @ApiResponse(responseCode = "200", description = "User retrieved successfully")
+    @GetMapping(path = "/{userId}")
+    public ResponseEntity<AppUserResponse> getUser(@PathVariable UUID userId) {
+
+        AppUserResponse userResponse = appUserService.getUserById(userId);
+
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Modify a user", description = "Modify an existing user")
+    @ApiResponse(responseCode = "200", description = "User updated successfully")
+    @PatchMapping(path = "/{userId}")
+    public ResponseEntity<AppUserResponse> updateUser(@PathVariable UUID userId, @RequestBody UpdateAppUserRequest request) {
+
+        AppUserResponse userResponse = appUserService.updateUser(userId, request);
+
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Delete a user", description = "Soft delete an existing user")
+    @ApiResponse(responseCode = "204", description = "User deleted successfully")
+    @DeleteMapping(path = "/{userId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable UUID userId) {
+
+        appUserService.disableUser(userId);
+    }
+}
