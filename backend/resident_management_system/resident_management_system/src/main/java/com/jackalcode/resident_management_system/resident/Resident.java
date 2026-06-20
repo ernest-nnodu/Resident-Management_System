@@ -51,7 +51,6 @@ public class Resident {
     @Column(name = "nhs_number", unique = true)
     private String nhsNumber;
 
-    @Lob
     @Column(nullable = false)
     private String allergies;
 

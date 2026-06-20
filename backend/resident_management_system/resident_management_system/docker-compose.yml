@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: rms_postgres
+    environment:
+      POSTGRES_USER: rms_user
+      POSTGRES_PASSWORD: rms_password
+      POSTGRES_DB: rms_db
+    ports:
+      - "5433:5432"
